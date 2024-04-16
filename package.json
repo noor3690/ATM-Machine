@@ -1,9 +1,10 @@
 {
-  "name": "atm-machine",
-  "version": "1.0.0",
+  "name": "noor3s21-atm-machine",
+  "version": "2.0.0",
   "description": "This is a Fast -Cash-ATM machine",
   "main": "index.js",
   "type": "module",
+  "bin": "atm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
