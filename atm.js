@@ -1,22 +1,23 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
+import chalk from "chalk";
 let myBalance = 2000;
 let my_pin = 78901;
-console.log("Welcome to Meezan Bank ATM!");
-console.log(`Your account Balance is ${myBalance}`);
+console.log(chalk.blue.bold("Welcome to Meezan Bank ATM!"));
+console.log(chalk.green(`Your account Balance is ${myBalance}`));
 let myPin = await inquirer.prompt([
     {
         name: "pin",
-        message: "Enter your pin number",
+        message: chalk.green("Enter your pin number"),
         type: "number",
     }
 ]);
 if (myPin.pin === my_pin) {
-    console.log("Correct pin code!");
+    console.log(chalk.yellow("Correct pin code!"));
     let operationAns = await inquirer.prompt([
         {
             name: "operation",
-            message: "Please select option",
+            message: chalk.green("Please select option"),
             type: "list",
             choices: ["Check balance", "Withdraw", "fastcash"]
         }
@@ -25,20 +26,20 @@ if (myPin.pin === my_pin) {
         let amountAns = await inquirer.prompt([
             {
                 name: "amount",
-                message: "Enter the amount you want to Withdraw",
+                message: chalk.green("Enter the amount you want to Withdraw"),
                 type: "number"
             }
         ]);
         if (amountAns.amount <= myBalance) {
             myBalance -= amountAns.amount;
-            console.log(`Your remaining Balance is ${myBalance}`);
+            console.log(chalk.yellow(`Your remaining Balance is ${myBalance}`));
         }
         else {
-            console.log('Insufficient Balance');
+            console.log(chalk.red('Insufficient Balance'));
         }
     }
     else if (operationAns.operation === "Check balance") {
-        console.log(`Your Balance is ${myBalance}`);
+        console.log(chalk.green(`Your Balance is ${myBalance}`));
     }
     else if (operationAns.operation === 'fastcash') {
         let fastcash = await inquirer.prompt([
@@ -51,14 +52,14 @@ if (myPin.pin === my_pin) {
         ]);
         if (fastcash.fastcash <= myBalance) {
             myBalance -= fastcash.fastcash;
-            console.log(`Your remaining balance is ${myBalance}`);
+            console.log(chalk.green(`Your remaining balance is ${myBalance}`));
         }
         else {
-            console.log('Insufficient Balance');
+            console.log(chalk.red('Insufficient Balance'));
         }
     }
 }
 else {
-    console.log("Incorrect pin code, Try Again!");
+    console.log(chalk.red("Incorrect pin code, Try Again!"));
 }
-console.log('Thank You!');
+console.log(chalk.blue.bold('Thank You!'));
